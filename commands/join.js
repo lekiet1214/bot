@@ -7,11 +7,11 @@ const {
 } = require('@discordjs/voice');
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(`join`)
+        .setName('join')
         .setDescription(`Join user's voice channel`),
     async execute(interaction, client) {
         const channel = interaction.member.voice.channel;
-        
+
         //Error case handling
         if (!channel) return interaction.channel.send('Please join a Voice Channel first!');
 
