@@ -1,6 +1,11 @@
 [
   {
     "options": [],
+    "name": "host",
+    "description": "Replies with host's stats!"
+  },
+  {
+    "options": [],
     "name": "join",
     "description": "Join user's voice channel"
   },
