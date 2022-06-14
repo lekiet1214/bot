@@ -26,6 +26,3 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm start
-
-name: Cancel Workflow Action
-uses: styfle/cancel-workflow-action@0.9.1
