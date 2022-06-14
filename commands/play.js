@@ -56,17 +56,11 @@ module.exports = {
             const stream = createAudioResource(await ytdl(youtubeLink, {
                 filter: "audioonly"
             }))
-            fs.writeFile('play.log', JSON.stringify(await ytdl(youtubeLink, {
-                filter: "audioonly"
-            }), null, 2), 'utf-8', e => {
-                if (e) throw e
-            })
             player.play(stream)
             connection.subscribe(player);
+            interaction.reply(`Playing ${searchString}`)
         } catch (error) {
-            fs.writeFile('playerror.log', JSON.stringify(error, null, 2), 'utf-8', e => {
-                if (e) throw e
-            })
+            if (e) console.log(e)
         }
     },
 };
