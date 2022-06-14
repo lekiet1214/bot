@@ -17,18 +17,24 @@ module.exports = {
         .setDescription(`Join user's voice channel`),
     async execute(interaction) {
         const channel = interaction.member.voice.channel;
+
         // DEBUG
         // fs.writeFile('./join.log', JSON.stringify(channel, null, 2), 'utf-8', e => {
         //     if (e) throw e;
         // })
+
         //Error case handling
         if (!channel) return interaction.channel.send('Please join a Voice Channel first!');
 
+        // Create voice connection
         const connection = voiceDiscord.joinVoiceChannel({
             channelId: channel.id,
             guildId: interaction.guild.id,
             adapterCreator: interaction.guild.voiceAdapterCreator,
+            selfDeaf: 'true',
+            selfMute: 'false',
         });
+
         return await interaction.reply('Joined!')
     },
 };
