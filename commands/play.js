@@ -63,9 +63,13 @@ module.exports = {
             })
             const resource = createAudioResource(stream)
             player.play(resource)
-            
+
             interaction.reply(`Playing ${searchString}`)
             console.log(generateDependencyReport());
+            player.on('error', (error) => {
+                console.error('Error:', error.message, 'with track', error.resource.metadata.title);
+
+            })
         } catch (e) {
             if (e) console.log(e)
         }
