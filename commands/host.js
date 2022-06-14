@@ -26,17 +26,10 @@ module.exports = {
                     "description": "Host statistic for nhobot",
                     "color": 16065893,
                     "timestamp": timenow,
-                    "url": "",
                     "author": {
                         "name": "nho",
                         "url": "https://www.facebook.com/le.kiet1214/",
                         "icon_url": "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/120544636_667386287527542_7324991427113116012_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Iq3_chh4co0AX_fV_M2&_nc_ht=scontent.fsgn2-5.fna&oh=00_AT9oX0pbkyoPItu1l-hJfHGFy0LTpt6RTQCBXSx8k5Qqng&oe=62CCD051"
-                    },
-                    "thumbnail": {
-                        "url": ""
-                    },
-                    "image": {
-                        "url": ""
                     },
                     "footer": {
                         "text": "nhobot by nho",
