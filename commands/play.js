@@ -14,7 +14,7 @@ const {
     joinVoiceChannel,
     generateDependencyReport
 } = require('@discordjs/voice');
-const fs = require('node::fs');
+const fs = require('fs');
 const ytdl = require('ytdl-core-discord');
 const yts = require('yt-search');
 
