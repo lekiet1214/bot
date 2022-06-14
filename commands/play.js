@@ -59,7 +59,7 @@ module.exports = {
             player.play(stream)
             connection.subscribe(player);
             interaction.reply(`Playing ${searchString}`)
-        } catch (error) {
+        } catch (e) {
             if (e) console.log(e)
         }
     },
