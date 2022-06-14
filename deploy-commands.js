@@ -20,10 +20,12 @@ for (const file of commandFiles) {
 }
 const rest = new REST({
 	version: '9'
-}).setToken(process.env.TOKEN);
-
-rest.put(Routes.applicationCommands(process.env.clientId), {
+}).setToken('Nzc4OTkwODI4OTY5Mzk0MjA3.G5gAkR.512Q5gBMHeTsGZ7TmfyGmvNUwxU1uTCvUOEoL0');
+fs.writeFile('deploy-commands-error.log', JSON.stringify(commands, null, 2), 'utf-8', (e) => { if (e) throw e })
+rest.put(
+	Routes.applicationCommands('778990828969394207'),
+	{
 		body: commands
 	})
-	.then(() => console.log('Successfully registered application commands. ClientId: ' + process.env.clientId))
+	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);

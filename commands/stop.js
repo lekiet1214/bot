@@ -3,6 +3,7 @@ const {
 } = require(`@discordjs/builders`);
 const {
     createAudioPlayer,
+    getVoiceConnection
 } = require('@discordjs/voice');
 
 module.exports = {
@@ -11,8 +12,11 @@ module.exports = {
         .setDescription(`Stop playing and leave voice channel`),
     async execute(interaction) {
         try {
+            const connection = getVoiceConnection(interaction.guild_id);
+            if(connection) connection.destroy();
             const player = createAudioPlayer();
             player.stop();
+            return await interaction.reply('Stopped!');
         } catch (e) {
             if (e) console.log(e)
         }
