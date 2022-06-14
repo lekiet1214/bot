@@ -38,7 +38,7 @@ module.exports = {
             if (!searchString) searchString = 'https://www.youtube.com/watch?v=7GQhyxSzlow';
             if (searchString) {
                 youtubeLink = await yts(searchString);
-                if (!youtubeLink.all[0].length) {
+                if (!youtubeLink?.all?.length) {
                     throw new Error('No results found for your search string. Please try a different one.');
                 }
                 youtubeLink = youtubeLink.all[0].url;
