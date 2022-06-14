@@ -1,7 +1,6 @@
 const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
-const fs = require('fs')
 const {Client, Intents} = require('discord.js');
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS]
