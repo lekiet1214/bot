@@ -1,30 +1,34 @@
 const {
     SlashCommandBuilder
 } = require(`@discordjs/builders`);
-
 const {
-    joinVoiceChannel
-} = require('@discordjs/voice');
+    Client,
+    Intents
+} = require('discord.js');
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS]
+})
+const voiceDiscord = require('@discordjs/voice');
+const fs = require('fs')
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('join')
         .setDescription(`Join user's voice channel`),
-    async execute(interaction, client) {
+    async execute(interaction) {
         const channel = interaction.member.voice.channel;
-
+        // DEBUG
+        // fs.writeFile('./join.log', JSON.stringify(channel, null, 2), 'utf-8', e => {
+        //     if (e) throw e;
+        // })
         //Error case handling
         if (!channel) return interaction.channel.send('Please join a Voice Channel first!');
-
-        const player = voiceDiscord.createAudioPlayer();
-        const resource = voiceDiscord.createAudioResource('');
 
         const connection = voiceDiscord.joinVoiceChannel({
             channelId: channel.id,
             guildId: interaction.guild.id,
             adapterCreator: interaction.guild.voiceAdapterCreator,
         });
-
-        player.play(resource);
-        connection.subscribe(player);
+        return await interaction.reply('Joined!')
     },
 };

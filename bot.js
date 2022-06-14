@@ -25,13 +25,11 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
-
 // Commands handling
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isApplicationCommand) return;
 
 	const command = client.commands.get(interaction.commandName);
-
 	if (!command) return;
 
 	try {

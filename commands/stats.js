@@ -2,12 +2,16 @@ const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 const fs = require('fs')
+const {Client, Intents} = require('discord.js');
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS]
+})
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('stats')
         .setDescription(`Replies with bot's stats!`),
-    async execute(interaction, client) {
+    async execute(interaction) {
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
             client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
