@@ -16,9 +16,6 @@ module.exports = {
         const ramstat = Math.floor((os.freemem / 1024) / 1024 /1024) + 'GB free out of ' + Math.floor((os.totalmem / 1024) / 1024/1024) + ' GB';
         // const cpustat = os.cpus[0].model;
         const cpustat = os.cpus()[0].model;
-        fs.writeFile('host.log', JSON.stringify(os.cpus()[0].model, null, 2), 'utf-8', e => {
-            if (e) throw e;
-        })
         const timenow = Date.now();
         const repli = {
             "color": 14637275,
@@ -46,7 +43,8 @@ module.exports = {
                     "value": operatingsys,
                     "inline": true
                 }
-            ]
+            ],
+            timestamp: new Date()
         }
         return await interaction.reply({ embeds: [repli] });
 
