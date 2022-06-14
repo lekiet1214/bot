@@ -12,8 +12,7 @@ const {
     createAudioPlayer,
     createAudioResource,
     joinVoiceChannel,
-    AudioResource,
-    StreamType
+    generateDependencyReport
 } = require('@discordjs/voice');
 const fs = require('fs');
 const ytdl = require('ytdl-core-discord');
@@ -60,6 +59,7 @@ module.exports = {
             player.play(stream)
             connection.subscribe(player);
             interaction.reply(`Playing ${searchString}`)
+            console.log(generateDependencyReport());
         } catch (e) {
             if (e) console.log(e)
         }
