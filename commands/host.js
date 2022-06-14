@@ -15,7 +15,9 @@ module.exports = {
         try {
             const operatingsys = os.platform + os.release;
             const ramstat = (os.freemem / 1024) / 1024 + '/' + (os.totalmem / 1024) / 1024;
-            const cpustat = os.cpus[0].model;
+            // const cpustat = os.cpus[0].model;
+            const cpustat = 'undefined'
+            console.log(os.cpus)
             let repli = {
                 "content": "",
                 "embed": {
