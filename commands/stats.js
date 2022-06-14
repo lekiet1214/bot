@@ -11,6 +11,7 @@ module.exports = {
         .setName('stats')
         .setDescription(`Replies with bot's stats!`),
     async execute(interaction) {
+        client.shard.broadcast('shardId');
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
             client.shard.broadcastEval(c => c.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)),
