@@ -12,7 +12,8 @@ const {
     createAudioPlayer,
     createAudioResource,
     joinVoiceChannel,
-    generateDependencyReport
+    generateDependencyReport,
+    NoSubscriberBehavior,
 } = require('@discordjs/voice');
 const fs = require('fs');
 const ytdl = require('ytdl-core-discord');
