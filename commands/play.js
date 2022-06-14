@@ -14,7 +14,7 @@ const {
     joinVoiceChannel,
     generateDependencyReport
 } = require('@discordjs/voice');
-const fs = require('fs');
+const fs = require('node::fs');
 const ytdl = require('ytdl-core-discord');
 const yts = require('yt-search');
 
@@ -37,13 +37,17 @@ module.exports = {
             if (!searchString) searchString = 'https://www.youtube.com/watch?v=7GQhyxSzlow';
             if (searchString) {
                 youtubeLink = await yts(searchString);
-                if (!youtubeLink?.all?.length) {
+                if (!youtubeLink) {
                     throw new Error('No results found for your search string. Please try a different one.');
                 }
                 youtubeLink = youtubeLink.all[0].url;
             }
             // Create audio resource
-            const player = createAudioPlayer();
+            const player = createAudioPlayer({
+                behaviors: {
+                    noSubscriber: NoSubscriberBehavior.Pause,
+                },
+            });
 
             // Join user's voice channel and subcribe to audio resource
             const connection = joinVoiceChannel({
@@ -51,13 +55,15 @@ module.exports = {
                 guildId: interaction.guild.id,
                 adapterCreator: interaction.guild.voiceAdapterCreator,
             });
+            connection.subscribe(player);
 
             // Play audio
-            const stream = createAudioResource(await ytdl(youtubeLink, {
+            const stream = await ytdl(youtubeLink, {
                 filter: "audioonly"
-            }))
+            })
+            const resource = createAudioResource(stream)
             player.play(stream)
-            connection.subscribe(player);
+            
             interaction.reply(`Playing ${searchString}`)
             console.log(generateDependencyReport());
         } catch (e) {
