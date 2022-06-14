@@ -62,7 +62,7 @@ module.exports = {
                 filter: "audioonly"
             })
             const resource = createAudioResource(stream)
-            player.play(stream)
+            player.play(resource)
             
             interaction.reply(`Playing ${searchString}`)
             console.log(generateDependencyReport());
