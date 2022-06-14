@@ -33,7 +33,6 @@ module.exports = {
             // Search for song if existed
             let searchString = interaction.options.getString('song');
             let youtubeLink;
-
             if (!searchString) searchString = 'https://www.youtube.com/watch?v=7GQhyxSzlow';
             if (searchString) {
                 youtubeLink = await yts(searchString);
