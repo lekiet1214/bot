@@ -32,7 +32,7 @@ module.exports = {
             if (!channel) return await interaction.reply('Please join a voice channel first!');
 
             // Search for song if existed
-            const searchString = interaction.options.getString('song');
+            let searchString = interaction.options.getString('song');
             let youtubeLink;
 
             if (!searchString) searchString = 'https://www.youtube.com/watch?v=7GQhyxSzlow';
