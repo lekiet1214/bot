@@ -1,3 +1,4 @@
+const {} = require('discord.js')
 module.exports = {
     name: 'ready',
     once: true,
@@ -7,5 +8,8 @@ module.exports = {
             type: "STREAMING",
             url: "https://www.youtube.com/watch?v=e97w-GHsRMY"
         });
+
+        // Set start time
+        process.env.STARTTIME = Date.now();
     },
 };
