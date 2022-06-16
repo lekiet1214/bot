@@ -45,7 +45,7 @@ module.exports = {
                 },
                 {
                     "name": "Uptime",
-                    "value": `${elapsedTime} ms`,
+                    "value": `${Date(elapsedTime).toString}`,
                     "inline": false
                 }
             ],
