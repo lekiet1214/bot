@@ -9,7 +9,8 @@
     "prestart": "node deploy-commands.js"
   },
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.12.x"
   },
   "keywords": [
     "discord",
