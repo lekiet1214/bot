@@ -57,10 +57,10 @@ module.exports = {
             const resource = createAudioResource(stream)
             player.play(resource)
 
-            interaction.reply(`Playing ${searchString}`)
+            interaction.reply(`Playing ${youtubeLink}`)
             console.log(generateDependencyReport());
             player.on('error', (error) => {
-                console.error('Error:', error.message, 'with track', error.resource.metadata.title);
+                console.error('Error:', error.message);
 
             })
         } catch (e) {
