@@ -16,7 +16,8 @@ module.exports = {
         const ramstat = Math.floor((os.freemem / 1024) / 1024 /1024) + 'GB free out of ' + Math.floor((os.totalmem / 1024) / 1024/1024) + ' GB';
         // const cpustat = os.cpus[0].model;
         const cpustat = os.cpus()[0].model;
-        const elapsedTime = Date(Date.now() - process.env.STARTTIME).toString();
+        const elapsedTime = Date(Date.now() - process.env.STARTTIME).toString().split(" ");
+        const sec = gteSec
         const repli = {
             "color": 14637275,
             "author": {
@@ -45,7 +46,7 @@ module.exports = {
                 },
                 {
                     "name": "Uptime",
-                    "value": elapsedTime,
+                    "value": elapsedTime[[4]],
                     "inline": false
                 }
             ],
