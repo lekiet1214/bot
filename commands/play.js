@@ -42,6 +42,7 @@ module.exports = {
                 },
             });
 
+            if(player.state != 'idle') return await interaction.reply('I am busy right now! Please try again later.')
             // Join user's voice channel and subcribe to audio resource
             const connection = joinVoiceChannel({
                 channelId: channel.id,
