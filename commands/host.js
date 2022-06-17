@@ -17,7 +17,6 @@ module.exports = {
         // const cpustat = os.cpus[0].model;
         const cpustat = os.cpus()[0].model;
         const elapsedTime = Date(Date.now() - process.env.STARTTIME).toString().split(" ");
-        const sec = gteSec
         const repli = {
             "color": 14637275,
             "author": {
