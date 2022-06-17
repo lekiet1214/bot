@@ -11,6 +11,7 @@ const {
 const fs = require('fs');
 const ytdl = require('ytdl-core-discord');
 const yts = require('yt-search');
+const playdl = require('play-dl');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -53,10 +54,15 @@ module.exports = {
             connection.subscribe(player);
 
             // Play audio
-            const stream = await ytdl(youtubeLink, {
-                filter: "audioonly"
+            // const stream = await ytdl(youtubeLink, {
+            //     filter: "audioonly"
+            // })
+            // Switch from youtube-dl to play-dl
+            const ytstream = await playdl.stream(youtubeLink)
+
+            const resource = createAudioResource(ytstream.stream,{
+                inputType: ytstream.type
             })
-            const resource = createAudioResource(stream)
             player.play(resource)
 
             interaction.reply(`Playing ${youtubeLink}`)
