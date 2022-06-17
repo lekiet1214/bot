@@ -8,9 +8,15 @@
     "start": "node index.js",
     "prestart": "node deploy-commands.js"
   },
-  "keywords": [],
+  "engines": {
+    "node": "16.x"
+  },
+  "keywords": [
+    "discord",
+    "nhobot"
+  ],
   "author": "nho",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
     "@discordjs/opus": "^0.5.3",
