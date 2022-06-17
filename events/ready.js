@@ -1,4 +1,5 @@
-const {} = require('discord.js')
+const {} = require('discord.js');
+const wake = require('../KeepAlive.js')
 module.exports = {
     name: 'ready',
     once: true,
@@ -11,5 +12,6 @@ module.exports = {
 
         // Set start time
         process.env.STARTTIME = Date.now();
+        wake.wake();
     },
 };
