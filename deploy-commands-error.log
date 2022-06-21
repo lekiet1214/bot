@@ -15,18 +15,6 @@
     "description": "Replies with Pong!"
   },
   {
-    "options": [
-      {
-        "type": 3,
-        "name": "song",
-        "description": "Song name to search",
-        "required": false
-      }
-    ],
-    "name": "play",
-    "description": "Play something!"
-  },
-  {
     "options": [],
     "name": "stats",
     "description": "Replies with bot's stats!"

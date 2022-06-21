@@ -8,7 +8,7 @@ const client = new Client({
 });
 const settings = {
     prefix: '!',
-    token: 'Nzc4OTkwODI4OTY5Mzk0MjA3.G5gAkR.512Q5gBMHeTsGZ7TmfyGmvNUwxU1uTCvUOEoL0'
+    token: process.env.TOKEN || "Nzc4OTkwODI4OTY5Mzk0MjA3.G5gAkR.512Q5gBMHeTsGZ7TmfyGmvNUwxU1uTCvUOEoL0"
 };
 
 const { Player } = require("discord-music-player");
