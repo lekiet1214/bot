@@ -1,163 +1,123 @@
 const {
-    Client,
-    Intents
+	Client,
+	Intents,
+	Collection
 } = require('discord.js');
-
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]
 });
+const settings = {
+    prefix: '!',
+    token: process.env.TOKEN || "Nzc4OTkwODI4OTY5Mzk0MjA3.G5gAkR.512Q5gBMHeTsGZ7TmfyGmvNUwxU1uTCvUOEoL0"
+};
 
-const {
-    Player
-} = require("discord-music-player");
-
+const { Player } = require("discord-music-player");
 const player = new Player(client, {
-    leaveOnEmpty: false,
-    deafenOnJoin: true,
-    timeout: 60,
-    volume: 100,
-
+    leaveOnEmpty: false, // This options are optional.
 });
-
+// You can define the Player as *client.player* to easily access it.
 client.player = player;
 
-const {
-    RepeatMode
-} = require('discord-music-player');
+client.on("ready", () => {
+    console.log("I am ready to Play with DMP 🎶");
+});
 
-let guildQueue;
+client.login(settings.token);
 
-function createGuildQueue(message) {
-    guildQueue = client.player.getQueue(message.guild.id);
-}
+const { RepeatMode } = require('discord-music-player');
 
-function skip() {
-    if (!guildQueue) return;
-    guildQueue.skip();
-}
-
-if (!guildQueue) return;
-
-function stop() {
-    if (!guildQueue) return;
-    guildQueue.stop();
-}
-
-function removeLoop() {
-    if (!guildQueue) return;
-    guildQueue.setRepeatMode(RepeatMode.DISABLED); // or 0 instead of RepeatMode.DISABLED
-}
-
-function Loop() {
-    if (!guildQueue) return;
-    guildQueue.setRepeatMode(RepeatMode.SONG); // or 1 instead of RepeatMode.SONG
-}
-
-function queueLoop() {
-    if (!guildQueue) return;
-    guildQueue.setRepeatMode(RepeatMode.QUEUE); // or 2 instead of RepeatMode.QUEUE
-}
-
-function setVolume(message) {
-    if (!guildQueue) return;
-    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g).shift();
-    guildQueue.setVolume(parseInt(args[0]));
-}
-
-function seek(message) {
-    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g).shift();
-    guildQueue.seek(parseInt(args[0]) * 1000);
-}
-
-function clearQueue() {
-    guildQueue.clearQueue();
-}
-
-function shuffle() {
-    guildQueue.shuffle();
-}
-
-function queue(message) {
-    message.reply(guildQueue.getQueue)
-}
-
-function getVolumne(message) {
-    message.reply('`' + guildQueue.getVolumne + '`')
-}
-
-function nowPlaying(message) {
-    message.reply(`Now playing ${guildQueue.nowPlaying}`)
-}
-
-function pause() {
-    guildQueue.setPaused(true);
-}
-
-
-
-function resume() {
-    guildQueue.setPaused(false);
-}
-
-function remove(message) {
-    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g).shift();
+client.on('messageCreate', async (message) => {
+    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+    const command = args.shift();
     let guildQueue = client.player.getQueue(message.guild.id);
-    guildQueue.remove(parseInt(args[0]));
-}
 
-function createProgressBar(message) {
-    if (!guildQueue) {
-        message.reply("Please try playing something first!");
-        return;
+    if(command === 'play') {
+        let queue = client.player.createQueue(message.guild.id);
+        await queue.join(message.member.voice.channel);
+        let song = await queue.play(args.join(' ')).catch(_ => {
+            if(!guildQueue)
+                queue.stop();
+        });
     }
-    const ProgressBar = guildQueue.createProgressBar();
 
-    // [======>              ][00:35/2:20]
-    console.log(ProgressBar.prettier);
-    message.reply(ProgressBar.prettier);
-}
+    if(command === 'playlist') {
+        let queue = client.player.createQueue(message.guild.id);
+        await queue.join(message.member.voice.channel);
+        let song = await queue.playlist(args.join(' ')).catch(_ => {
+            if(!guildQueue)
+                queue.stop();
+        });
+    }
 
-function play(message) {
-    let queue = client.player.createQueue(message.guild.id);
-    await queue.join(message.member.voice.channel);
-    let song = await queue.play(args.join(' ')).catch(_ => {
-        if (!guildQueue)
-            queue.stop();
-    });
-}
+    if(command === 'skip') {
+        guildQueue.skip();
+    }
 
-function playlist(message) {
-    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g).shift();
-    let guildQueue = client.player.getQueue(message.guild.id);
-    let queue = client.player.createQueue(message.guild.id);
-    await queue.join(message.member.voice.channel);
-    let song = await queue.playlist(args.join(' ')).catch(_ => {
-        if (!guildQueue)
-            queue.stop();
-    });
-}
+    if(command === 'stop') {
+        guildQueue.stop();
+    }
 
-module.exports = {
-    play,
-    remove,
-    removeLoop,
-    skip,
-    play,
-    clearQueue,
-    createProgressBar,
-    playlist,
-    resume,
-    pause,
-    nowPlaying,
-    getQueue,
-    getVolumne,
-    seek,
-    setVolume,
-    Loop,
-    shuffle,
-    queue,
-    queueLoop,
-    stop,
-    createGuildQueue,
-    guildQueue
-}
+    if(command === 'removeLoop') {
+        guildQueue.setRepeatMode(RepeatMode.DISABLED); // or 0 instead of RepeatMode.DISABLED
+    }
+
+    if(command === 'toggleLoop') {
+        guildQueue.setRepeatMode(RepeatMode.SONG); // or 1 instead of RepeatMode.SONG
+    }
+
+    if(command === 'toggleQueueLoop') {
+        guildQueue.setRepeatMode(RepeatMode.QUEUE); // or 2 instead of RepeatMode.QUEUE
+    }
+
+    if(command === 'setVolume') {
+        guildQueue.setVolume(parseInt(args[0]));
+    }
+
+    if(command === 'seek') {
+        guildQueue.seek(parseInt(args[0]) * 1000);
+    }
+
+    if(command === 'clearQueue') {
+        guildQueue.clearQueue();
+    }
+
+    if(command === 'shuffle') {
+        guildQueue.shuffle();
+    }
+
+    if(command === 'getQueue') {
+        console.log(guildQueue);
+    }
+
+    if(command === 'getVolume') {
+        console.log(guildQueue.volume)
+    }
+
+    if(command === 'nowPlaying') {
+        console.log(`Now playing: ${guildQueue.nowPlaying}`);
+    }
+
+    if(command === 'pause') {
+        guildQueue.setPaused(true);
+    }
+
+    if(command === 'resume') {
+        guildQueue.setPaused(false);
+    }
+
+    if(command === 'remove') {
+        guildQueue.remove(parseInt(args[0]));
+    }
+
+    if(command === 'createProgressBar') {
+        if(!guildQueue){
+            message.reply("Please try playing something first!");
+            return;
+        }
+        const ProgressBar = guildQueue.createProgressBar();
+        
+        // [======>              ][00:35/2:20]
+        console.log(ProgressBar.prettier);
+        message.reply(ProgressBar.prettier);
+    }
+})
