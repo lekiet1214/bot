@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon index-testbuild.js",
-    "start": "concurrently \"node index.js\" \"node functions/helper.js\"",
+    "start": "node index.js",
     "prestart": "node deploy-commands.js"
   },
   "engines": {
