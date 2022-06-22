@@ -12,8 +12,8 @@ function wake() {
         const handler = setInterval(() => {
 
             fetch(url)
-                .then(res => console.log(`response-ok: ${res.ok}, status: ${res.status}`)
-                    .catch(err => console.error(`Error occured: ${err}`)));
+                .then(res => console.log(`response-ok: ${res.ok}, status: ${res.status}`))
+                    .catch(err => console.error(`Error occured: ${err}`));
 
         }, interval);
 
