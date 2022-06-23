@@ -1,3 +1,10 @@
+// template for music player commands
+// please note that the commands are not case sensitive
+// const commands = ['play', 'skip', 'stop', 'pause', 'resume', 'volume', 'queue', 'repeat'];
+// reference: event/messageCreate.js
+
+
+
 const {
 	Client,
 	Intents,
