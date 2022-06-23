@@ -65,7 +65,11 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
-client.on(event.name, ()=>console.debug(`${event.name} event triggered`));
+client.on('messageCreate', (message) => {
+	if (message.author.bot) return;
+	console.debug(`${message.author.username} said: ${message.content}`);
+})
+
 // Login to Discord with your client's token
 client.login(process.env.TOKEN);
 
