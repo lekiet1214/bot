@@ -82,12 +82,13 @@ module.exports = {
         if (message.content.startsWith(process.env.PREFIX)) {
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
+            console.debug(message.guild.id + '\n' + message.guildId)
             let guildQueue = client.player.getQueue(message.guild.id);
             let queue;
             let song;
             switch (command) {
                 case 'play':
-                    queue = client.player.createQueue(message.guild.id);
+                    queue = client.player.createQueue(message.guildId);
                     await queue.join(message.member.voice.channel);
                     song = await queue.play(args.join(' ')).catch(_ => {
                         if (!guildQueue)
