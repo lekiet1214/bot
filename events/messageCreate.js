@@ -1,7 +1,5 @@
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
-const dotenv = require('dotenv');
-dotenv.config();
 const { Player } = require('discord-music-player');
 
 client.player = new Player(client, {
