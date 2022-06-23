@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 const dotenv = require('dotenv');
 dotenv.config();
@@ -9,6 +9,33 @@ client.player = new Player(client, {
     leaveOnEnd: false,
     leaveOnStop: false,
 });
+
+const helpMessage = new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Help')
+    .setDescription('This is a help message.')
+    .addFields(
+        { name: '!play', value: 'Play a song.' },
+        { name: '!skip', value: 'Skip the current song.' },
+        { name: '!stop', value: 'Stop the player.' },
+        { name: '!pause', value: 'Pause the player.' },
+        { name: '!resume', value: 'Resume the player.' },
+        { name: '!volume', value: 'Show the volume.' },
+        { name: '!queue', value: 'Show the queue.' },
+        { name: '!repeat', value: 'Repeat the current song.' },
+        { name: '!shuffle', value: 'Shuffle the queue.' },
+        { name: '!clear', value: 'Clear the queue.' },
+        { name: '!np', value: 'Show the current song.' },
+        { name: '!help', value: 'Show this message.' },
+        { name: '!invite', value: 'Show the bot\'s invite link.' },
+        { name: '!norepeat', value: 'Disable repeat.' },
+        { name: '!progress', value: 'Show the progress of the current song.' },
+        { name: '!setvolume', value: 'Set the volume of the player.' },
+        { name: '!seek', value: 'Sek to a specific time of the current song.' },
+    )
+    .setTimestamp()
+    .setFooter('Made by @nh0#6764');
+
 
 
 // Init event listener for player
@@ -153,6 +180,7 @@ module.exports = {
                     }
                     break;
                 case 'help':
+                    message.channel.send(helpMessage);
                     break;
                 case 'progress':
                     if (guildQueue) {
