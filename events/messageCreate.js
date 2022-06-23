@@ -1,6 +1,23 @@
-const { Client, Intents, MessageEmbed } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
+const {
+    Client,
+    Intents,
+    MessageEmbed
+} = require('discord.js');
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_VOICE_STATES,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+        Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.GUILD_MESSAGE_TYPING,
+        Intents.FLAGS.DIRECT_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGES,
+    ]
+});
 const { Player } = require('discord-music-player');
+const fs = require('fs');
 
 client.player = new Player(client, {
     leaveOnEmpty: false,
@@ -34,24 +51,28 @@ const helpMessage = new MessageEmbed()
     .setTimestamp()
     .setFooter({ text: 'Made by @nh0#6764' });
 
-client.on('ready', () => {
-    console.log('I am ready to Play with DMP 🎶');
-});
+client.login(process.env.TOKEN);
 
 module.exports = {
     name: 'messageCreate',
     on: true,
     async execute(message) {
-        console.debug(message)
         if (message.author.bot) return;
+
+        // DEBUG
+        // console.debug(client.guilds.resolve(message.guild.id))
+        // fs.writeFile('./message.debug.log', JSON.stringify(client.guilds.resolve(message.guild.id), null, 2), (err) => {
+        //     if (err) console.log(err);
+        // }
+        // )
         if (message.content.startsWith(process.env.PREFIX)) {
+            let song;
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
-            console.debug(message.guild.id + '\n' + message.guildId)
             let guildQueue = client.player.getQueue(message.guild.id);
             switch (command) {
                 case 'play':
-                    let queue = client.player.createQueue(message.guildId);
+                    let queue = client.player.createQueue(message.guild.id);
                     await queue.join(message.member.voice.channel);
                     song = await queue.play(args.join(' ')).catch(_ => {
                         if (!guildQueue)
@@ -143,7 +164,7 @@ module.exports = {
                     }
                     break;
                 case 'help':
-                    message.channel.send({ embeds:[ helpMessage] });
+                    message.channel.send({ embeds: [helpMessage] });
                     break;
                 case 'progress':
                     if (guildQueue) {
@@ -169,7 +190,7 @@ module.exports = {
                 case 'playlist':
                     let playlistqueue = client.player.createQueue(message.guild.id);
                     await playlistqueue.join(message.member.voice.channel);
-                    let song = await playlistqueue.playlist(args.join(' ')).catch(_ => {
+                    song = await playlistqueue.playlist(args.join(' ')).catch(_ => {
                         if (!guildQueue)
                             queue.stop();
                     });

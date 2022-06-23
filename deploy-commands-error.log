@@ -6,11 +6,6 @@
   },
   {
     "options": [],
-    "name": "join",
-    "description": "Join user's voice channel"
-  },
-  {
-    "options": [],
     "name": "ping",
     "description": "Replies with Pong!"
   },
