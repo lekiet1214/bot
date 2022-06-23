@@ -77,12 +77,11 @@ module.exports = {
     name: 'messageCreate',
     on: true,
     async execute(message) {
-        console.log(`${message.author.username} said: ${message.content}`);
         if (message.author.bot) return;
         if (message.content.startsWith(process.env.PREFIX)) {
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
-            let guildQueue = client.player.queues.getQueue(message.guild.id);
+            let guildQueue = client.player.getQueue(message.guild.id);
             let queue;
             let song;
             switch (command) {
