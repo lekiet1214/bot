@@ -77,6 +77,7 @@ module.exports = {
     name: 'messageCreate',
     on: true,
     async execute(message) {
+        console.debug(message)
         if (message.author.bot) return;
         if (message.content.startsWith(process.env.PREFIX)) {
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
