@@ -178,7 +178,7 @@ module.exports = {
                     }
                     break;
                 case 'help':
-                    message.channel.send({ embed: helpMessage });
+                    message.channel.send({ embeds:[ helpMessage] });
                     break;
                 case 'progress':
                     if (guildQueue) {
