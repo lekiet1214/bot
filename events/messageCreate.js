@@ -32,7 +32,7 @@ const helpMessage = new MessageEmbed()
         { name: '!seek', value: 'Sek to a specific time of the current song.' },
     )
     .setTimestamp()
-    .setFooter('Made by @nh0#6764');
+    .setFooter({ text: 'Made by @nh0#6764' });
 
 
 
@@ -178,7 +178,7 @@ module.exports = {
                     }
                     break;
                 case 'help':
-                    message.channel.send(helpMessage);
+                    message.channel.send({ embed: helpMessage });
                     break;
                 case 'progress':
                     if (guildQueue) {
