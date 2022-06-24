@@ -211,10 +211,10 @@ module.exports = {
                         });
                         break;
                     case 'radio':
-                        args = ('lofi radio').split(/ +/g);
+                        argss = ('lofi radio').split(/ +/g);
                         queue = client.player.createQueue(message.guild.id);
                         await queue.join(message.member.voice.channel);
-                        song = await queue.play(args.join(' ')).catch(_ => {
+                        song = await queue.play(argss.join(' ')).catch(_ => {
                             if (!guildQueue)
                                 queue.stop();
                         });
