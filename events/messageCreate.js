@@ -70,6 +70,17 @@ module.exports = {
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
             let guildQueue = client.player.getQueue(message.guild.id);
+
+            // Pre handling command args
+            switch (command) {
+                case 'play':
+                case 'playlist':
+                    if (args.length === 0) {
+                        message.channel.send('Please provide a link or a search query.');
+                        return;
+                    }
+                    break;
+            }
             switch (command) {
                 case 'play':
                     let queue = client.player.createQueue(message.guild.id);
