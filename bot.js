@@ -24,7 +24,7 @@ const client = new Client({
 });
 
 // logger
-import DiscordLogger from 'discordjs-logger'
+const { DiscordLogger } = require('discordjs-logger')
 const logger = new DiscordLogger(client);
 logger.debug();
 
