@@ -71,6 +71,10 @@ module.exports = {
             const command = args.shift().toLowerCase();
             let guildQueue = client.player.getQueue(message.guild.id);
             let queue = client.player.getQueue(message.guild.id);
+            if(guildQueue === undefined && queue === undefined) {
+                queue= client.player.createQueue(message.guild.id);
+                guildQueue = queue;
+            }
             // Pre handling command args
             switch (command) {
                 case 'play':
