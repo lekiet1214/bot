@@ -255,7 +255,7 @@ module.exports = {
                         message.channel.send(`I got undefeanded.`))
                     // Emitted when there was an error in runtime
                     .on('error', (error, queue) => {
-                        message.channel.send(`Error: ${error} in ${queue.guild.name}`);
+                        console.error(`Error: ${error} in ${queue.guild.name}`);
                     });
             }
         }
