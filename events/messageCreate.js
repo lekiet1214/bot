@@ -195,6 +195,14 @@ module.exports = {
                             queue.stop();
                     });
                     break;
+                case 'radio':
+                    let radiouqueue = client.player.createQueue(message.guild.id);
+                    await radiouqueue.join(message.member.voice.channel);
+                    song = await radiouqueue.play('lofi radio').catch(_ => {
+                        if (!guildQueue)
+                            queue.stop();
+                    });
+                    break;
                 default:
                     message.channel.send('Command not found.');
                     break;
