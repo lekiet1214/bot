@@ -183,7 +183,7 @@ module.exports = {
                         break;
                     case 'progress':
                         if (guildQueue) {
-                            message.channel.send(`Progress: ${guildQueue.createProgressBar().prettier()}`);
+                            message.channel.send(`Progress: ${guildQueue.createProgressBar.prettier}`);
                         } else {
                             message.channel.send('No music is playing.');
                         }
