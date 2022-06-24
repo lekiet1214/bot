@@ -59,7 +59,7 @@ module.exports = {
     async execute(message) {
         try {
             if (message.author.bot) return;
-
+            console.debug(message);
             // DEBUG
             // console.debug(client.guilds.resolve(message.guild.id))
             // fs.writeFile('./message.debug.log', JSON.stringify(client.guilds.resolve(message.guild.id), null, 2), (err) => {
