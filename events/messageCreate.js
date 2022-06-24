@@ -61,8 +61,8 @@ module.exports = {
             if (message.author.bot) return;
             console.debug(message);
             // DEBUG
-            // console.debug(client.guilds.resolve(message.guild.id))
-            // fs.writeFile('./message.debug.log', JSON.stringify(client.guilds.resolve(message.guild.id), null, 2), (err) => {
+            // console.debug(client.guilds.resolve(message.guildId))
+            // fs.writeFile('./message.debug.log', JSON.stringify(client.guilds.resolve(message.guildId), null, 2), (err) => {
             //     if (err) message.channel.send(err);
             // }
             // )
@@ -70,10 +70,10 @@ module.exports = {
                 let song;
                 const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
                 const command = args.shift().toLowerCase();
-                let guildQueue = client.player.getQueue(message.guild.id);
-                let queue = client.player.getQueue(message.guild.id);
+                let guildQueue = client.player.getQueue(message.guildId);
+                let queue = client.player.getQueue(message.guildId);
                 if (guildQueue === undefined && queue === undefined) {
-                    queue = client.player.createQueue(message.guild.id);
+                    queue = client.player.createQueue(message.guildId);
                     guildQueue = queue;
                 }
                 // Pre handling command args
@@ -203,7 +203,7 @@ module.exports = {
                         }
                         break;
                     case 'playlist':
-                        let playlistqueue = client.player.createQueue(message.guild.id);
+                        let playlistqueue = client.player.createQueue(message.guildId);
                         await playlistqueue.join(message.member.voice.channel);
                         song = await playlistqueue.playlist(args.join(' ')).catch(_ => {
                             if (!guildQueue)
@@ -212,7 +212,7 @@ module.exports = {
                         break;
                     case 'radio':
                         argss = ('lofi radio').split(/ +/g);
-                        queue = client.player.createQueue(message.guild.id);
+                        queue = client.player.createQueue(message.guildId);
                         await queue.join(message.member.voice.channel);
                         song = await queue.play(argss.join(' ')).catch(_ => {
                             if (!guildQueue)
