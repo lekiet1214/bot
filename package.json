@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon index-testbuild.js",
-    "start": "concurrently \"node index.js\" \"node functions/sentry_int.js\"",
+    "start": "node index.js",
     "prestart": "node deploy-commands.js",
     "test-music": "node events/messageCreate.js"
   },
