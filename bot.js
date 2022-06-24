@@ -23,6 +23,11 @@ const client = new Client({
 	]
 });
 
+// logger
+import DiscordLogger from 'discordjs-logger'
+const logger = new DiscordLogger(client);
+logger.debug();
+
 // Pre-commands handling
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
