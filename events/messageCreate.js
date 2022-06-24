@@ -182,7 +182,7 @@ module.exports = {
                         message.channel.send({ embeds: [helpMessage] });
                         break;
                     case 'progress':
-                        if (guildQueue) {
+                        if (queue.isPlaying) {
                             message.channel.send(`Progress: ${guildQueue.createProgressBar.prettier}`);
                         } else {
                             message.channel.send('No music is playing.');
