@@ -70,7 +70,7 @@ module.exports = {
             const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/g);
             const command = args.shift().toLowerCase();
             let guildQueue = client.player.getQueue(message.guild.id);
-
+            let queue = client.player.getQueue(message.guild.id);
             // Pre handling command args
             switch (command) {
                 case 'play':
@@ -83,7 +83,6 @@ module.exports = {
             }
             switch (command) {
                 case 'play':
-                    let queue = client.player.createQueue(message.guild.id);
                     await queue.join(message.member.voice.channel);
                     song = await queue.play(args.join(' ')).catch(_ => {
                         if (!guildQueue)
@@ -207,9 +206,8 @@ module.exports = {
                     });
                     break;
                 case 'radio':
-                    let radiouqueue = client.player.createQueue(message.guild.id);
-                    await radiouqueue.join(message.member.voice.channel);
-                    song = await radiouqueue.play('lofi radio').catch(_ => {
+                    await queue.join(message.member.voice.channel);
+                    song = await queue.play('lofi radio').catch(_ => {
                         if (!guildQueue)
                             queue.stop();
                     });
