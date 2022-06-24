@@ -37,14 +37,8 @@ const client = new Client({
 	]
 });
 
-// logger
-const { DiscordLogger } = require('discordjs-logger')
-const logger = new DiscordLogger(client);
-
 setTimeout(() => {
 	try {
-		logger.debug();
-
 		// Pre-commands handling
 		client.commands = new Collection();
 		const commandsPath = path.join(__dirname, 'commands');
