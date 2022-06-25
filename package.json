@@ -37,5 +37,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.5.1"
+  },
+  "engines": {
+    "node": "16.x.x",
+    "npm": "lastest"
   }
 }
