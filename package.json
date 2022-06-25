@@ -41,6 +41,6 @@
   },
   "engines": {
     "node": "16.x.x",
-    "npm": "lastest"
+    "npm": "8.x.x"
   }
 }
