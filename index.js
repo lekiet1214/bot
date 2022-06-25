@@ -5,10 +5,7 @@ require('dotenv').config()
 const testShardList = []
 testShardList.push(1306)
 const manager = new ShardingManager('./bot.js', {
-  token: process.env.TOKEN,
-  totalShards: 'auto',
-  shardList: [1306, 810],
-  respawn: 'true'
+  token: process.env.TOKEN
 })
 
 manager.spawn()
