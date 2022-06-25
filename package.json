@@ -7,8 +7,7 @@
     "start": "node index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "p": "prettier . --write",
-    "prestart": "npm run lint && npm run p"
+    "p": "prettier . --write"
   },
   "repository": {
     "type": "git",
