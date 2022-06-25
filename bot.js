@@ -117,3 +117,9 @@ client.distube
   .on('searchDone', () => { })
 
 client.login(process.env.TOKEN)
+
+const app = require('express')()
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${PORT}`)
+})
