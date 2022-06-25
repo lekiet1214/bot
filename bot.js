@@ -71,12 +71,14 @@ client.on('messageCreate', async message => {
 })
 
 const status = queue =>
-  `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
+  `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(', ') || 'Off'}\` | Loop: \`${
+    queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
   }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
 client.distube
   .on('playSong', (queue, song) =>
     queue.textChannel.send(
-      `${client.emotes.play} | Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user
+      `${client.emotes.play} | Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${
+        song.user
       }\n${status(queue)}`
     )
   )
@@ -87,7 +89,8 @@ client.distube
   )
   .on('addList', (queue, playlist) =>
     queue.textChannel.send(
-      `${client.emotes.success} | Added \`${playlist.name}\` playlist (${playlist.songs.length
+      `${client.emotes.success} | Added \`${playlist.name}\` playlist (${
+        playlist.songs.length
       } songs) to queue\n${status(queue)}`
     )
   )
@@ -114,7 +117,7 @@ client.distube
       `${client.emotes.error} | Invalid answer! You have to enter the number in the range of the results`
     )
   )
-  .on('searchDone', () => { })
+  .on('searchDone', () => {})
 
 client.login(process.env.TOKEN)
 client.on('error', console.error)

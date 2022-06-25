@@ -1,6 +1,4 @@
-const {
-  ShardingManager
-} = require('discord.js')
+const { ShardingManager } = require('discord.js')
 require('dotenv').config()
 const testShardList = []
 testShardList.push(1306)
@@ -8,7 +6,8 @@ const manager = new ShardingManager('./bot.js', {
   token: process.env.TOKEN
 })
 
-manager.spawn()
+manager
+  .spawn()
   .then(shards => {
     shards.forEach(shard => {
       shard.on('message', message => {

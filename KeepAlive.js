@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 const interval = 25 * 60 * 1000 // interval in milliseconds - {25mins x 60s x 1000}ms
 const url = 'https://nhobot.herokuapp.com/'
 let handler = null
-function wake () {
+function wake() {
   try {
     handler = setInterval(() => {
       fetch(url)
@@ -16,8 +16,8 @@ function wake () {
     console.error('Error occured: retrying...')
     clearInterval(handler)
     return setTimeout(() => wake(), 10000)
-  };
-};
+  }
+}
 
 module.exports = {
   wake
