@@ -2,7 +2,7 @@ const config = require('../config.json')
 module.exports = {
   name: 'messageCreate',
   on: true,
-  async execute (message, client) {
+  async execute (message) {
     if (message.author.bot) return
     const prefix = config.prefix
     if (message.content.indexOf(prefix) !== 0) return
@@ -78,18 +78,6 @@ module.exports = {
       if (!reason) return message.channel.send('You must provide a reason for the warn.')
       message.guild.member(user).roles.remove(message.guild.roles.find('name', 'Warned'))
       message.channel.send(`${user.tag} has been unwarned by ${message.author.tag} because: ${reason}`)
-    }
-
-    // Handle music commands
-    const cmd = client.command.get(command) || client.command.get(client.aliases.get(command))
-    if (!cmd) return
-    if (cmd.inVoiceChannel && !message.member.voice.channel) {
-      return message.channel.send(`${client.emotes.error} | You must be in a voice channel!`)
-    }
-    try {
-      cmd.run(client, message, args)
-    } catch (e) {
-      console.error(e)
     }
   }
 }
