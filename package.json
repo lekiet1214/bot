@@ -7,7 +7,8 @@
     "start": "node index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "p": "prettier . --write"
+    "p": "prettier . --write",
+    "poststart": "node ./KeepAlive.js"
   },
   "repository": {
     "type": "git",
