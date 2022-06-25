@@ -14,6 +14,7 @@ const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 const dotenv = require('dotenv')
 dotenv.config()
+const { wake } = require('./KeepAlive.js')
 
 client.config = require('./config.json')
 client.distube = new DisTube(client, {
@@ -49,6 +50,7 @@ fs.readdir('./commands/', (err, files) => {
 
 client.on('ready', () => {
   console.log(`${client.user.tag} is ready to play music.`)
+  wake();
 })
 
 client.on('messageCreate', async message => {
