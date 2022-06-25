@@ -1,25 +1,21 @@
 {
-  "name": "distube-example",
+  "name": "nhobot",
   "version": "1.0.0",
-  "description": "DisTube example music bot.",
+  "description": "nhobot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "p": "prettier . --write",
-    "prestart": "npm ci --no-optional"
+    "p": "prettier . --write"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/distubejs/example.git"
+    "url": "git@github.com:lekiet1214/bot.git"
   },
-  "author": "Skick",
+  "author": "nho",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/distubejs/example/issues"
-  },
-  "homepage": "https://github.com/distubejs/example#readme",
+  "homepage": "@lekiet1214/bot",
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
     "@discordjs/voice": "^0.10.0",
