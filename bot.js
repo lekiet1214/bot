@@ -117,7 +117,7 @@ client.distube
 // .on('searchDone', () => { })
 
 client.login(process.env.TOKEN)
-
+client.on('error', console.error)
 const app = require('express')()
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
