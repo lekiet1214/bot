@@ -1,8 +1,6 @@
-const { REST } = require('@discordjs/rest');
 const {
     ShardingManager
 } = require('discord.js');
-const { Const } = require('sodium');
 require('dotenv').config();
 const testShardList = []
 testShardList.push(1306)
@@ -30,10 +28,3 @@ manager.on('shardCreate', shard => {
         shard.send({type: "shardId", data: {shardId: shard.id}});
     });
 });
-
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.write('You should not be here!');
-  res.end();
-}).listen(process.env.PORT);

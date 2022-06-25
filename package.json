@@ -1,38 +1,41 @@
 {
-  "name": "bot",
+  "name": "distube-example",
   "version": "1.0.0",
-  "description": "nhobot",
+  "description": "DisTube example music bot.",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index-testbuild.js",
     "start": "node index.js",
-    "prestart": "node deploy-commands.js",
-    "test-music": "node events/messageCreate.js"
+    "lint": "eslint ./",
+    "lint:fix": "eslint --fix ./",
+    "p": "prettier . --write"
   },
-  "engines": {
-    "node": "16.x",
-    "npm": "8.12.x"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/distubejs/example.git"
   },
-  "keywords": [
-    "discord",
-    "nhobot"
-  ],
-  "author": "nho",
+  "author": "Skick",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/distubejs/example/issues"
+  },
+  "homepage": "https://github.com/distubejs/example#readme",
   "dependencies": {
-    "@discordjs/builders": "^0.15.0",
     "@discordjs/opus": "^0.7.0",
-    "@discordjs/rest": "^0.5.0",
-    "@discordjs/voice": "^0.10.0",
-    "@sentry/node": "^7.2.0",
-    "@sentry/tracing": "^7.2.0",
-    "concurrently": "^7.2.2",
-    "discord-api-types": "^0.33.5",
-    "discord.js": "^13.8.0",
-    "dotenv": "^16.0.1",
-    "ffmpeg-static": "^4.4.1",
-    "sodium-native": "^3.3.0",
-    "yt-search": "^2.10.3",
-    "ytdl-core-discord": "^1.1.0"
+    "@discordjs/voice": "^0.8.0",
+    "@distube/soundcloud": "^1.1.0",
+    "@distube/spotify": "^1.2.1",
+    "@distube/yt-dlp": "^0.0.2",
+    "discord.js": "^13.6.0",
+    "distube": "^3.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "libsodium-wrappers": "^0.7.9"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-standard": "^17.0.0-0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.5.1"
   }
 }
