@@ -18,7 +18,7 @@ const { wake } = require('./KeepAlive.js')
 const logdna = require('@logdna/logger')
 
 const options = {
-  app: 'myAppName',
+  app: 'github',
   level: 'info' // set a default for when level is not provided in function calls
 }
 
