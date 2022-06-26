@@ -15,6 +15,14 @@ const { YtDlpPlugin } = require('@distube/yt-dlp')
 const dotenv = require('dotenv')
 dotenv.config()
 const { wake } = require('./KeepAlive.js')
+const logdna = require('@logdna/logger')
+
+const options = {
+  app: 'myAppName',
+  level: 'info' // set a default for when level is not provided in function calls
+}
+
+const logger = logdna.createLogger('103432aaec3b31a9af650c41daa2bff9', options)
 
 client.config = require('./config.json')
 client.distube = new DisTube(client, {
@@ -39,12 +47,17 @@ client.aliases = new Discord.Collection()
 client.emotes = config.emoji
 
 fs.readdir('./commands/', (err, files) => {
-  if (err) return console.log('Could not find any commands!')
+  if (err) {
+    console.log('Could not find any commands!')
+    logger.error('Could not find any commands!')
+    return
+  }
   const jsFiles = files.filter(f => f.split('.').pop() === 'js')
   if (jsFiles.length <= 0) return console.log('Could not find any commands!')
   jsFiles.forEach(file => {
     const cmd = require(`./commands/${file}`)
     console.log(`Loaded ${file}`)
+    logger.log(`Loaded ${file}`)
     client.commands.set(cmd.name, cmd)
     if (cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name))
   })
@@ -57,6 +70,7 @@ client.on('ready', () => {
   if (PORT) {
     app.listen(PORT, () => {
       console.log(`Listening on port ${PORT}`)
+      logger.log(`Listening on port ${PORT}`)
       wake()
     })
   }
@@ -80,6 +94,7 @@ client.on('messageCreate', async message => {
     cmd.run(client, message, args)
   } catch (e) {
     console.error(e)
+    logger.error(e)
     message.channel.send(`${client.emotes.error} | Error: \`${e}\``)
   }
 })
@@ -108,7 +123,10 @@ client.distube
   .on('error', (channel, e) => {
     channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
     fs.writeFile('./logs/distupe-error.log', e.toString() + '\n', err => {
-      if (err) console.error(err)
+      if (err) {
+        console.error(err)
+        logger.error(err)
+      }
     })
   })
   .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
@@ -138,5 +156,6 @@ client.on('error', (e) => {
     fs.writeFile('./logs/Discord-error.log', JSON.stringify(e, null, 2) + '\n', (e) => {
       if (e) console.error(e)
     })
+    logger.error(e)
   }
 })
