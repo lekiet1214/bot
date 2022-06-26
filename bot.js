@@ -50,7 +50,7 @@ fs.readdir('./commands/', (err, files) => {
 
 client.on('ready', () => {
   console.log(`${client.user.tag} is ready to play music.`)
-  wake();
+  wake()
 })
 
 client.on('messageCreate', async message => {
@@ -95,7 +95,9 @@ client.distube
   )
   .on('error', (channel, e) => {
     channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
-    console.error(e)
+    fs.writeFile('./logs/distupe-error.log', e.toString() + '\n', err => {
+      if (err) console.error(err)
+    })
   })
   .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
   .on('searchNoResult', (message, query) =>
@@ -119,7 +121,13 @@ client.distube
   .on('searchDone', () => { })
 
 client.login(process.env.TOKEN)
-client.on('error', (e) => { if (e) console.error(e) })
+client.on('error', (e) => {
+  if (e) {
+    fs.writeFile('./logs/Discord-error.log', JSON.stringify(e, null, 2) + '\n', (e) => {
+      if (e) console.error(e)
+    })
+  }
+})
 const app = require('express')()
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
