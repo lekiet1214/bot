@@ -1,6 +1,6 @@
 name: Node.js CI
 env:
-        TOKEN: ${{ secrets.TOKEN }}
+  TOKEN: ${{ secrets.BOTTOKEN }}
 on:
   push:
     branches: [ "master" ]
