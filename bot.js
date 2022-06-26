@@ -65,7 +65,7 @@ fs.readdir('./commands/', (err, files) => {
 
 client.on('ready', () => {
   client.user.setStatus('idle')
-  client.user.setActivity('with the music!', { type: 'COMPETING' })
+  client.user.setActivity('Survival Solo', { type: 'COMPETING' })
   // const RichPresence = require('rich-presence-builder')
   // new RichPresence({ clientID: process.env.CLIENTID })
   //   .setState('Playing Solo (1 of 2)')
