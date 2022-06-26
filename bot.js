@@ -30,7 +30,9 @@ client.distube = new DisTube(client, {
     new YtDlpPlugin()
   ],
   youtubeDL: false,
-  searchSongs: 5
+  searchSongs: 5,
+  leaveOnEmpty: false,
+  leaveOnFinish: false
 })
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
