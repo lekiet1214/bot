@@ -64,6 +64,13 @@ fs.readdir('./commands/', (err, files) => {
 })
 
 client.on('ready', () => {
+  client.user.setStatus('idle')
+  const RichPresence = require('rich-presence-builder')
+  new RichPresence({ clientID: process.env.CLIENTID })
+    .setState('Playing Solo (1 of 2)')
+    .setDetails('Survival')
+    .setLargeImage('sadbear', 'Numbani')
+    .go()
   console.log(`${client.user.tag} is ready to play music.`)
   const app = require('express')()
   const PORT = process.env.PORT
