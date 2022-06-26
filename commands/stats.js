@@ -11,7 +11,7 @@ module.exports = {
         **Users:** ${client.users.cache.size}
         **Channels:** ${client.channels.cache.size}
         **Commands:** ${client.commands.size}
-        **Uptime:** ${Date(client.uptime).toLocaleTimeString('en-US')}
+        **Uptime:** ${(Date(client.uptime).toString().split(' '))[4]}
       `)
     message.channel.send({ embeds: [embed] })
   }
