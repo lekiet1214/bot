@@ -16,7 +16,6 @@ const dotenv = require('dotenv')
 dotenv.config()
 const { wake } = require('./KeepAlive.js')
 const logdna = require('@logdna/logger')
-const { ActivityTypes } = require('discord.js/typings/enums')
 
 const options = {
   app: 'github',
@@ -66,7 +65,7 @@ fs.readdir('./commands/', (err, files) => {
 
 client.on('ready', () => {
   client.user.setStatus('idle')
-  client.user.setActivity('with the music!', { type: ActivityTypes.COMPETING })
+  client.user.setActivity('with the music!', { type: 'COMPETING' })
   // const RichPresence = require('rich-presence-builder')
   // new RichPresence({ clientID: process.env.CLIENTID })
   //   .setState('Playing Solo (1 of 2)')
