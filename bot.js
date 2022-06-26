@@ -50,7 +50,17 @@ fs.readdir('./commands/', (err, files) => {
 
 client.on('ready', () => {
   console.log(`${client.user.tag} is ready to play music.`)
-  wake()
+  const app = require('express')()
+  const PORT = process.env.PORT
+  if (PORT) {
+    app.listen(PORT, () => {
+      console.log(`Listening on port ${PORT}`)
+      wake()
+    })
+  }
+  app.get('/', (req, res) => {
+    res.send('Hi!')
+  })
 })
 
 client.on('messageCreate', async message => {
@@ -127,12 +137,4 @@ client.on('error', (e) => {
       if (e) console.error(e)
     })
   }
-})
-const app = require('express')()
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`Our app is running on port ${PORT}`)
-})
-app.get('/', (req, res) => {
-  res.send('Hi!')
 })
