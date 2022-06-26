@@ -1,5 +1,6 @@
 name: Node.js CI
-
+env:
+        TOKEN: ${{ secrets.TOKEN }}
 on:
   push:
     branches: [ "master" ]
@@ -27,8 +28,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
-      env:
-        TOKEN: ${{ secrets.TOKEN }}
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
