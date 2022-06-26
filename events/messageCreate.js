@@ -2,7 +2,7 @@ const config = require('../config.json')
 module.exports = {
   name: 'messageCreate',
   on: true,
-  async execute (message) {
+  run: async (message, client) => {
     if (message.author.bot) return
     const prefix = config.prefix
     if (message.content.indexOf(prefix) !== 0) return
