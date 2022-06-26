@@ -16,5 +16,28 @@ module.exports = {
                 .map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``)
                 .join('\n')}\n*Enter anything else or wait 60 seconds to cancel*`
     )
+    const filter = m => m.author.id === message.author.id
+    const collector = message.channel.createMessageCollector(filter, { time: 60000 })
+    collector.on('collect', m => {
+      if (m.content.match(/^\d+$/)) {
+        const index = parseInt(m.content) - 1
+        if (index < 0 || index >= searchRes.length) {
+          return message.channel.send(`${client.emotes.error} | Invalid index!`)
+        }
+        client.distube.play(message.member.voice.channel, searchRes[index], {
+          member: message.member,
+          textChannel: message.channel,
+          message
+        })
+        collector.stop()
+      }
+    }
+    )
+    collector.on('end', collected => {
+      if (collected.size === 0) {
+        message.channel.send(`${client.emotes.error} | Search cancelled!`)
+      }
+    }
+    )
   }
 }
