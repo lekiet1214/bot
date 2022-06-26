@@ -120,7 +120,7 @@ client.distube
   )
   .on('searchDone', () => { })
 
-client.login(process.env.TOKEN)
+client.login(process.env.TOKEN || config.token)
 client.on('error', (e) => {
   if (e) {
     fs.writeFile('./logs/Discord-error.log', JSON.stringify(e, null, 2) + '\n', (e) => {
