@@ -20,13 +20,15 @@ jobs:
       uses: styfle/cancel-workflow-action@0.9.1
       with:
         access_token: ${{ github.token }}
-        
+
     - name: Setup FFmpeg
       uses: FedericoCarboni/setup-ffmpeg@v1.1.0
 
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'

@@ -22,6 +22,7 @@
     "@distube/soundcloud": "^1.1.0",
     "@distube/spotify": "^1.2.1",
     "@distube/yt-dlp": "^1.0.2",
+    "@logdna/logger": "^2.6.5",
     "discord.js": "^13.6.0",
     "distube": "^3.3.1",
     "dotenv": "^16.0.1",
