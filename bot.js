@@ -130,12 +130,12 @@ client.distube
   )
   .on('error', (channel, e) => {
     channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
-    fs.writeFile('./logs/distupe-error.log', e.toString() + '\n', err => {
-      if (err) {
-        console.error(err)
-        logger.error(err)
-      }
-    })
+    // fs.writeFile('./logs/distupe-error.log', e.toString() + '\n', err => {
+    //   if (err) {
+    //     console.error(err)
+    //     logger.error(err)
+    //   }
+    // })
   })
   .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
   .on('searchNoResult', (message, query) =>
@@ -161,9 +161,9 @@ client.distube
 client.login(process.env.TOKEN || config.token)
 client.on('error', (e) => {
   if (e) {
-    fs.writeFile('./logs/Discord-error.log', JSON.stringify(e, null, 2) + '\n', (e) => {
-      if (e) console.error(e)
-    })
+    // fs.writeFile('./logs/Discord-error.log', JSON.stringify(e, null, 2) + '\n', (e) => {
+    //   if (e) console.error(e)
+    // })
     logger.error(e)
   }
 })
