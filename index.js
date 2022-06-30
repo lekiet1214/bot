@@ -14,6 +14,16 @@ const options = {
 
 const logger = logdna.createLogger('103432aaec3b31a9af650c41daa2bff9', options)
 
+const { MongoClient, ServerApiVersion } = require('mongodb')
+const uri = `mongodb+srv://nhobot:${process.env.MONGODB_PASSWORD}@discord0.ve7qj.mongodb.net/?retryWrites=true&w=majority`
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+client.connect(err => {
+  const collection = client.db('test').collection('devices')
+  logger.error('MongoDB error: ', err, '\n', collection)
+  // perform actions on the collection object
+  client.close()
+})
+
 manager
   .spawn()
   .then(shards => {
