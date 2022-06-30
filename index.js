@@ -19,7 +19,7 @@ const uri = `mongodb+srv://nhobot:${process.env.MONGODB_PASSWORD}@discord0.ve7qj
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 client.connect(err => {
   const collection = client.db('test').collection('devices')
-  logger.error('MongoDB error: ', err, '\n', collection)
+  if (err) logger.error('MongoDB error: ', err, '\n', collection)
   // perform actions on the collection object
   client.close()
 })
