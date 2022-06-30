@@ -7,8 +7,7 @@
     "start": "node index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./",
-    "p": "prettier . --write",
-    "prestart": "curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-2DPU9MMO6QD3ZYJ8RM4S59NKJRM NEW_RELIC_ACCOUNT_ID=3530221 /usr/local/bin/newrelic install -n logs-integration"
+    "p": "prettier . --write"
   },
   "repository": {
     "type": "git",

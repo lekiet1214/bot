@@ -1,4 +1,3 @@
-require('newrelic')
 const { ShardingManager } = require('discord.js')
 require('dotenv').config()
 const config = require('./config.json')
