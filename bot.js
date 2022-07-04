@@ -23,7 +23,7 @@ const options = {
 }
 
 const logger = logdna.createLogger('103432aaec3b31a9af650c41daa2bff9', options)
-
+client.logger = logger
 client.config = require('./config.json')
 client.distube = new DisTube(client, {
   leaveOnStop: false,
